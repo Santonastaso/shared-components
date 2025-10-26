@@ -68,4 +68,17 @@ interface DataTableProps<T> {
  */
 declare function DataTable<T extends Record<string, any>>({ data, columns: userColumns, onEditRow, onDeleteRow, onRowClick, enableFiltering, filterableColumns, stickyColumns, onBulkDelete, onBulkExport, initialPageSize, pageSizeOptions, enableGlobalSearch, enableColumnVisibility, enableRowSelection }: DataTableProps<T>): react_jsx_runtime.JSX.Element;
 
-export { DataTable, ErrorBoundary, useErrorBoundary, withErrorBoundary };
+interface HeaderProps {
+    user?: {
+        email?: string;
+    } | null;
+    onSignOut: () => void;
+    onToggleSidebar: () => void;
+    ThemeSwitch: React.ComponentType;
+    Button: React.ComponentType<any>;
+    MenuIcon: React.ComponentType<any>;
+    LogOutIcon: React.ComponentType<any>;
+}
+declare function Header({ user, onSignOut, onToggleSidebar, ThemeSwitch, Button, MenuIcon, LogOutIcon }: HeaderProps): react_jsx_runtime.JSX.Element;
+
+export { DataTable, ErrorBoundary, Header, useErrorBoundary, withErrorBoundary };

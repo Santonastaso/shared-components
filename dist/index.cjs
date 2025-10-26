@@ -39,6 +39,7 @@ __export(src_exports, {
   ERROR_TYPES: () => ERROR_TYPES,
   ErrorBoundary: () => ErrorBoundary,
   FIELD_CONFIGS: () => FIELD_CONFIGS,
+  Header: () => Header,
   MACHINE_STATUSES: () => MACHINE_STATUSES,
   PRODUCT_TYPES: () => PRODUCT_TYPES,
   SEAL_SIDES: () => SEAL_SIDES,
@@ -57,6 +58,7 @@ __export(src_exports, {
   throttle: () => throttle,
   useErrorBoundary: () => useErrorBoundary,
   useErrorHandler: () => useErrorHandler,
+  useSidebar: () => useSidebar,
   useValidationErrorHandler: () => useValidationErrorHandler,
   withErrorBoundary: () => withErrorBoundary
 });
@@ -703,6 +705,38 @@ function DataTable({
   ] });
 }
 
+// src/components/Header.tsx
+var import_jsx_runtime3 = require("react/jsx-runtime");
+function Header({ user, onSignOut, onToggleSidebar, ThemeSwitch, Button: Button2, MenuIcon, LogOutIcon }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("header", { className: "bg-secondary shadow-sm border-b border-border", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center justify-between px-4 py-2", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "flex items-center", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+      "button",
+      {
+        onClick: onToggleSidebar,
+        className: "p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ring",
+        children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(MenuIcon, { className: "h-6 w-6" })
+      }
+    ) }),
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center space-x-4", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(ThemeSwitch, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "text-sm text-muted-foreground", children: user?.email?.split("@")[0] || "User" }),
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
+        Button2,
+        {
+          variant: "outline",
+          size: "sm",
+          onClick: onSignOut,
+          className: "flex items-center gap-2",
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(LogOutIcon, { className: "h-4 w-4" }),
+            "Logout"
+          ]
+        }
+      )
+    ] })
+  ] }) });
+}
+
 // src/hooks/useErrorHandler.ts
 var import_react3 = require("react");
 var showError = (message) => console.error(message);
@@ -879,6 +913,15 @@ var useValidationErrorHandler = () => {
     clearErrors
   };
 };
+
+// src/hooks/useSidebar.ts
+var import_zustand = require("zustand");
+var useSidebar = (0, import_zustand.create)((set) => ({
+  isOpen: true,
+  toggle: () => set((state) => ({ isOpen: !state.isOpen })),
+  open: () => set({ isOpen: true }),
+  close: () => set({ isOpen: false })
+}));
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   ALERT_TYPES,
@@ -890,6 +933,7 @@ var useValidationErrorHandler = () => {
   ERROR_TYPES,
   ErrorBoundary,
   FIELD_CONFIGS,
+  Header,
   MACHINE_STATUSES,
   PRODUCT_TYPES,
   SEAL_SIDES,
@@ -908,6 +952,7 @@ var useValidationErrorHandler = () => {
   throttle,
   useErrorBoundary,
   useErrorHandler,
+  useSidebar,
   useValidationErrorHandler,
   withErrorBoundary
 });

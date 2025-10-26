@@ -1,13 +1,15 @@
 import {
   DataTable,
   ErrorBoundary,
+  Header,
   useErrorBoundary,
   withErrorBoundary
-} from "./chunk-67M4MNGW.js";
+} from "./chunk-2HH4GJRV.js";
 import {
   useErrorHandler,
+  useSidebar,
   useValidationErrorHandler
-} from "./chunk-DVOA4POV.js";
+} from "./chunk-L3P7SMBZ.js";
 import {
   cn,
   confirmAction,
@@ -45,6 +47,7 @@ export {
   ERROR_TYPES,
   ErrorBoundary,
   FIELD_CONFIGS,
+  Header,
   MACHINE_STATUSES,
   PRODUCT_TYPES,
   SEAL_SIDES,
@@ -63,6 +66,7 @@ export {
   throttle,
   useErrorBoundary,
   useErrorHandler,
+  useSidebar,
   useValidationErrorHandler,
   withErrorBoundary
 };

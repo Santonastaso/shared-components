@@ -21,6 +21,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 var hooks_exports = {};
 __export(hooks_exports, {
   useErrorHandler: () => useErrorHandler,
+  useSidebar: () => useSidebar,
   useValidationErrorHandler: () => useValidationErrorHandler
 });
 module.exports = __toCommonJS(hooks_exports);
@@ -230,9 +231,19 @@ var useValidationErrorHandler = () => {
     clearErrors
   };
 };
+
+// src/hooks/useSidebar.ts
+var import_zustand = require("zustand");
+var useSidebar = (0, import_zustand.create)((set) => ({
+  isOpen: true,
+  toggle: () => set((state) => ({ isOpen: !state.isOpen })),
+  open: () => set({ isOpen: true }),
+  close: () => set({ isOpen: false })
+}));
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   useErrorHandler,
+  useSidebar,
   useValidationErrorHandler
 });
 //# sourceMappingURL=hooks.cjs.map

@@ -90,4 +90,6 @@ declare const useValidationErrorHandler: () => {
     clearErrors: () => void;
 };
 
-export { useErrorHandler, useValidationErrorHandler };
+declare const useSidebar: any;
+
+export { useErrorHandler, useSidebar, useValidationErrorHandler };

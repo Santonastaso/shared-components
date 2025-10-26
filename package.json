@@ -41,7 +41,9 @@
     "clsx": "^2.1.1",
     "react": ">=18",
     "react-dom": ">=18",
-    "tailwind-merge": "^2.3.0"
+    "tailwind-merge": "^2.3.0",
+    "zustand": "^4.0.0",
+    "lucide-react": "^0.400.0"
   },
   "devDependencies": {
     "@types/node": "^24.9.1",

@@ -486,10 +486,43 @@ function DataTable({
   ] });
 }
 
+// src/components/Header.tsx
+import { jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
+function Header({ user, onSignOut, onToggleSidebar, ThemeSwitch, Button: Button2, MenuIcon, LogOutIcon }) {
+  return /* @__PURE__ */ jsx3("header", { className: "bg-secondary shadow-sm border-b border-border", children: /* @__PURE__ */ jsxs3("div", { className: "flex items-center justify-between px-4 py-2", children: [
+    /* @__PURE__ */ jsx3("div", { className: "flex items-center", children: /* @__PURE__ */ jsx3(
+      "button",
+      {
+        onClick: onToggleSidebar,
+        className: "p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ring",
+        children: /* @__PURE__ */ jsx3(MenuIcon, { className: "h-6 w-6" })
+      }
+    ) }),
+    /* @__PURE__ */ jsxs3("div", { className: "flex items-center space-x-4", children: [
+      /* @__PURE__ */ jsx3(ThemeSwitch, {}),
+      /* @__PURE__ */ jsx3("span", { className: "text-sm text-muted-foreground", children: user?.email?.split("@")[0] || "User" }),
+      /* @__PURE__ */ jsxs3(
+        Button2,
+        {
+          variant: "outline",
+          size: "sm",
+          onClick: onSignOut,
+          className: "flex items-center gap-2",
+          children: [
+            /* @__PURE__ */ jsx3(LogOutIcon, { className: "h-4 w-4" }),
+            "Logout"
+          ]
+        }
+      )
+    ] })
+  ] }) });
+}
+
 export {
   ErrorBoundary,
   withErrorBoundary,
   useErrorBoundary,
-  DataTable
+  DataTable,
+  Header
 };
-//# sourceMappingURL=chunk-67M4MNGW.js.map
+//# sourceMappingURL=chunk-2HH4GJRV.js.map

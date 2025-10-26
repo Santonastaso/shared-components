@@ -179,8 +179,18 @@ var useValidationErrorHandler = () => {
   };
 };
 
+// src/hooks/useSidebar.ts
+import { create } from "zustand";
+var useSidebar = create((set) => ({
+  isOpen: true,
+  toggle: () => set((state) => ({ isOpen: !state.isOpen })),
+  open: () => set({ isOpen: true }),
+  close: () => set({ isOpen: false })
+}));
+
 export {
   useErrorHandler,
-  useValidationErrorHandler
+  useValidationErrorHandler,
+  useSidebar
 };
-//# sourceMappingURL=chunk-DVOA4POV.js.map
+//# sourceMappingURL=chunk-L3P7SMBZ.js.map
