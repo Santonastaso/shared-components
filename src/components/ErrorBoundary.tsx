@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Button } from '@andrea/crm-ui';
+// import { Button } from '@santonastaso/crm-ui';
 import { generateId } from '../utils';
 
 interface ErrorBoundaryState {

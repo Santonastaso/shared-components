@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useReactTable, getCoreRowModel, flexRender, getSortedRowModel, type ColumnDef } from '@tanstack/react-table';
-// Note: These would normally be imported from @andrea/crm-ui
+// Note: These would normally be imported from @santonastaso/crm-ui
 // For now using placeholder interfaces
 interface TableProps { children: React.ReactNode; className?: string; }
 interface ButtonProps { children: React.ReactNode; variant?: string; size?: string; onClick?: () => void; disabled?: boolean; className?: string; }

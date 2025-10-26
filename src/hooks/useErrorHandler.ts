@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from 'react';
-// Note: These would normally be imported from @andrea/shared-utils
+// Note: These would normally be imported from @santonastaso/shared-utils
 // For now using placeholder functions
 const showError = (message: string) => console.error(message);
 const showWarning = (message: string) => console.warn(message);
