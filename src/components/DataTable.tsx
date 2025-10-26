@@ -6,7 +6,7 @@ interface TableProps { children: React.ReactNode; className?: string; }
 interface ButtonProps { children: React.ReactNode; variant?: string; size?: string; onClick?: () => void; disabled?: boolean; className?: string; }
 
 const Table = ({ children, className, ...props }: TableProps) => (
-  <table className={`w-full border-collapse border border-gray-200 ${className || ''}`} {...props}>
+  <table className={`w-full border-collapse border border-gray-200 table-auto ${className || ''}`} {...props}>
     {children}
   </table>
 );
@@ -33,7 +33,7 @@ const TableRow = ({ children, onClick, className }: { children: React.ReactNode;
 );
 
 const TableHead = ({ children }: { children: React.ReactNode }) => (
-  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
+  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200 min-w-0">
     {children}
   </th>
 );
@@ -41,9 +41,11 @@ const TableHead = ({ children }: { children: React.ReactNode }) => (
 const TableCell = ({ children, colSpan, className }: { children: React.ReactNode; colSpan?: number; className?: string }) => (
   <td 
     colSpan={colSpan} 
-    className={`px-6 py-4 whitespace-nowrap text-sm text-gray-900 border-b border-gray-200 ${className || ''}`}
+    className={`px-4 py-3 text-sm text-gray-900 border-b border-gray-200 min-w-0 max-w-xs ${className || ''}`}
   >
-    {children}
+    <div className="truncate" title={typeof children === 'string' ? children : ''}>
+      {children}
+    </div>
   </td>
 );
 
@@ -266,47 +268,33 @@ export function DataTable<T extends Record<string, any>>({
 
   return (
     <div className="w-full space-y-4">
-      {/* Search and Filters */}
-      {(enableGlobalSearch || enableFiltering) && (
-        <div className="flex flex-col sm:flex-row gap-4">
-          {enableGlobalSearch && (
-            <div className="flex-1">
-              <input
-                type="text"
-                placeholder="Search all columns..."
-                value={globalQuery}
-                onChange={(e) => {
-                  setGlobalQuery(e.target.value);
-                  setPage(0);
-                }}
-                className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-              />
-            </div>
-          )}
-          
-          {enableFiltering && filterableColumns.length > 0 && (
-            <div className="flex gap-2">
-              {filterableColumns.map(column => (
-                <input
-                  key={column}
-                  type="text"
-                  placeholder={`Filter ${column}...`}
-                  value={filters[column] || ''}
-                  onChange={(e) => handleFilterChange(column, e.target.value)}
-                  className="px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                />
-              ))}
-              <Button variant="outline" onClick={clearFilters}>
-                Clear
-              </Button>
-            </div>
+      {/* Search Only - Remove individual column filters */}
+      {enableGlobalSearch && (
+        <div className="flex items-center gap-4">
+          <div className="flex-1">
+            <input
+              type="text"
+              placeholder="Search all columns..."
+              value={globalQuery}
+              onChange={(e) => {
+                setGlobalQuery(e.target.value);
+                setPage(0);
+              }}
+              className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            />
+          </div>
+          {globalQuery && (
+            <Button variant="outline" onClick={clearFilters}>
+              Clear Search
+            </Button>
           )}
         </div>
       )}
 
-      {/* Table */}
+      {/* Table with horizontal scrolling */}
       <div className="rounded-md border border-gray-200 overflow-hidden shadow-sm">
-        <Table>
+        <div className="overflow-x-auto">
+          <Table className="min-w-full">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -352,7 +340,8 @@ export function DataTable<T extends Record<string, any>>({
               </TableRow>
             )}
           </TableBody>
-        </Table>
+          </Table>
+        </div>
       </div>
 
       {/* Pagination */}

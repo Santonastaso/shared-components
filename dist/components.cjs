@@ -244,7 +244,7 @@ var DATA_TABLE_DEFAULTS = {
 
 // src/components/DataTable.tsx
 var import_jsx_runtime2 = require("react/jsx-runtime");
-var Table = ({ children, className, ...props }) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("table", { className: `w-full border-collapse border border-gray-200 ${className || ""}`, ...props, children });
+var Table = ({ children, className, ...props }) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("table", { className: `w-full border-collapse border border-gray-200 table-auto ${className || ""}`, ...props, children });
 var TableHeader = ({ children }) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("thead", { className: "bg-gray-50", children });
 var TableBody = ({ children }) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("tbody", { className: "divide-y divide-gray-200", children });
 var TableRow = ({ children, onClick, className }) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
@@ -255,13 +255,13 @@ var TableRow = ({ children, onClick, className }) => /* @__PURE__ */ (0, import_
     children
   }
 );
-var TableHead = ({ children }) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("th", { className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200", children });
+var TableHead = ({ children }) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("th", { className: "px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200 min-w-0", children });
 var TableCell = ({ children, colSpan, className }) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
   "td",
   {
     colSpan,
-    className: `px-6 py-4 whitespace-nowrap text-sm text-gray-900 border-b border-gray-200 ${className || ""}`,
-    children
+    className: `px-4 py-3 text-sm text-gray-900 border-b border-gray-200 min-w-0 max-w-xs ${className || ""}`,
+    children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "truncate", title: typeof children === "string" ? children : "", children })
   }
 );
 var Button = ({ children, variant = "default", size = "default", onClick, disabled, className }) => {
@@ -430,8 +430,8 @@ function DataTable({
     setPage(0);
   };
   return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "w-full space-y-4", children: [
-    (enableGlobalSearch || enableFiltering) && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "flex flex-col sm:flex-row gap-4", children: [
-      enableGlobalSearch && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "flex-1", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+    enableGlobalSearch && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "flex items-center gap-4", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "flex-1", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
         "input",
         {
           type: "text",
@@ -444,22 +444,9 @@ function DataTable({
           className: "w-full px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         }
       ) }),
-      enableFiltering && filterableColumns.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "flex gap-2", children: [
-        filterableColumns.map((column) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-          "input",
-          {
-            type: "text",
-            placeholder: `Filter ${column}...`,
-            value: filters[column] || "",
-            onChange: (e) => handleFilterChange(column, e.target.value),
-            className: "px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-          },
-          column
-        )),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Button, { variant: "outline", onClick: clearFilters, children: "Clear" })
-      ] })
+      globalQuery && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Button, { variant: "outline", onClick: clearFilters, children: "Clear Search" })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "rounded-md border border-gray-200 overflow-hidden shadow-sm", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(Table, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "rounded-md border border-gray-200 overflow-hidden shadow-sm", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "overflow-x-auto", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(Table, { className: "min-w-full", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TableHeader, { children: table.getHeaderGroups().map((headerGroup) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TableRow, { children: headerGroup.headers.map((header) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TableHead, { children: header.isPlaceholder ? null : /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
         "div",
         {
@@ -483,7 +470,7 @@ function DataTable({
         },
         row.id
       )) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TableRow, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(TableCell, { colSpan: columns.length, className: "h-24 text-center", children: "No results found." }) }) })
-    ] }) }),
+    ] }) }) }),
     /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "flex items-center justify-between", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "text-sm text-muted-foreground", children: [
         "Showing ",
